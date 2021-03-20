@@ -6,3 +6,38 @@
  * HINT:
  * This requires joining from the category table down to the actor table.
  */
+
+SELECT
+    DISTINCT first_name, last_name
+FROM
+    (
+        SELECT
+            actor_id
+        FROM
+            film_actor
+        INNER JOIN
+            film USING (film_id)
+        INNER JOIN
+            film_category USING (film_id)
+        INNER JOIN
+            category USING (category_id)
+        WHERE
+            category.name = 'Children' AND
+            actor_id NOT IN
+            (
+                SELECT
+                    actor_id
+                FROM
+                    film_actor
+                INNER JOIN
+                    film USING (film_id)
+                INNER JOIN
+                    film_category USING (film_id)
+                INNER JOIN
+                    category USING (category_id)
+                WHERE
+                    category.name = 'Horror'
+            )
+    ) AS t2
+INNER JOIN
+    actor USING (actor_id);

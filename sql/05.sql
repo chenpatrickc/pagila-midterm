@@ -3,7 +3,7 @@
  * You do not need to compute the total disk usage per row.
  */
 
-CREATE TABLE project (
+/* CREATE TABLE project (
     id SERIAL PRIMARY KEY,
     target_type VARCHAR(2) NOT NULL,
     target_id INTEGER NOT NULL,
@@ -14,4 +14,18 @@ CREATE TABLE project (
     updated_at TIMESTAMPTZ,
     action SMALLINT NOT NULL,
     author_id BIGINT NOT NULL
+);
+*/
+
+CREATE TABLE project (
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    author_id BIGINT NOT NULL,
+    id SERIAL PRIMARY KEY,
+    target_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL UNIQUE,
+    target_type VARCHAR(2) NOT NULL,
+    action SMALLINT NOT NULL,
+    title VARCHAR(256),
+    data TEXT
 );
